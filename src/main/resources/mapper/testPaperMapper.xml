@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzp.Mapper.testPaperMapper">
+    <update id="updateTestPaper">
+        update course_question set Question_type=#{Question_type},Question=#{Question},Option_1=#{Option_1},Option_2=#{Option_2},Option_3=#{Option_3},Option_4=#{Option_4},answer=#{answer},point=#{point} where id=#{id} and course=#{course}
+    </update>
+    <select id="getAll" resultType="com.xzp.Pojo.course_question">
+        select *  from course_question where course=#{course}
+    </select>
+</mapper>

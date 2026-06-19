@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzp.Mapper.StudentMapper">
+    <update id="UpdateStuinfo">
+        update student set name=#{name},phonenumber=#{phonenumber},college=#{college},sex=#{sex} where id=#{id}
+    </update>
+    <select id="findById" resultMap="StudentResultMap">
+        select * from student where id=#{id}
+    </select>
+    <select id="getCoursesByid" resultMap="CourseListMap">
+        select stu.id,stu.name,stu.course,g.time,g.point,g.m
+        from student stu left join
+        (select s.student_name,r.course,r.point,r.time,s.m from exam_record r,(select course,student_name,max(retake_Flag) m from exam_record  group by course,student_name) s
+        where s.course=r.course and s.m=r.retake_Flag and s.student_name=r.student_name) g on stu.name=g.student_name and stu.course=g.course and stu.id=#{id}
+    </select>
+    <select id="getNameByid" resultType="java.lang.String">
+        select distinct name from student where id=#{id}
+    </select>
+    <resultMap id="CourseListMap" type="com.xzp.Pojo.CourseList">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <collection property="lists" ofType="com.xzp.Pojo.Point">
+            <result column="course" property="course"></result>
+            <result column="time" property="time"></result>
+            <result column="point" property="point"></result>
+            <result column="m" property="m"></result>
+        </collection>
+    </resultMap>
+    <resultMap id="StudentResultMap" type="com.xzp.Pojo.Student">
+        <!-- 基础字段一对一 -->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="phonenumber" property="phonenumber"/>
+        <result column="college" property="college"/>
+        <!-- 一对多集合：循环读取course列填充List -->
+        <collection property="courses" ofType="String">
+            <result column="course"/>
+        </collection>
+    </resultMap>
+</mapper>

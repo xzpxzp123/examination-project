@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>信息提交</title>
+    <style>
+        .container {
+            width: 280px;
+            margin: 80px auto;
+        }
+        .item {
+            margin: 15px 0;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            background: #1677ff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h3 align="center">填写信息</h3>
+    <!-- 提交地址：localhost:8080/login ，请求方式POST -->
+    <form action="http://localhost:8080/login" method="get">
+        <div class="item">
+            <label>ID：</label>
+            <!-- name="id" 对应后端参数名，提交时作为参数传递 -->
+            <input type="text" name="id" placeholder="请输入ID" required>
+        </div>
+        <div class="item">
+            <label>学院：</label>
+            <!-- name="college" 对应后端参数名 -->
+            <input type="text" name="college" placeholder="请输入学院" required>
+        </div>
+        <div class="item">
+            <button type="submit">提交</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
