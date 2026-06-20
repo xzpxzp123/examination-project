@@ -1,5 +1,6 @@
 package com.xzp.Controller;
 
+import com.xzp.Aop.InvokeLog;
 import com.xzp.Mapper.TeacherMapper;
 import com.xzp.Pojo.ResopnseResult;
 import com.xzp.Pojo.Student;
@@ -28,7 +29,7 @@ public class LoginController {
     // 注入业务层，用于校验id+college是否合法
     @Autowired
     private LoginService loginService;
-
+    @InvokeLog
     @RequestMapping("/Teacher/login")
     public ResopnseResult<String> teahcer_login(@RequestParam(value = "id",required = true)Integer id,@RequestParam(value = "college",required = true)String college) {
 
@@ -48,6 +49,7 @@ public class LoginController {
         }
         return resopnseResult;
     }
+    @InvokeLog
     @RequestMapping("/Student/login")
     public ResopnseResult<String> student_login(@RequestParam(value = "id",required = true)int id,@RequestParam(value = "college",required = true)String college){
         Student student=loginService.Service2(id,college);
@@ -65,4 +67,6 @@ public class LoginController {
         return resopnseResult;
     }
 }
+
+
 
