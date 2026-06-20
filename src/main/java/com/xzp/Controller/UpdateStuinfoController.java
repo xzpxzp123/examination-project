@@ -1,5 +1,6 @@
 package com.xzp.Controller;
 
+import com.xzp.Aop.InvokeLog;
 import com.xzp.Mapper.StudentMapper;
 import com.xzp.Pojo.ResopnseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,18 @@ public class UpdateStuinfoController {
     StudentMapper studentMapper;
     @RequestMapping("/Student/contro/update")
     @Transactional
+    @InvokeLog
     public ResopnseResult<String> updateByid(int id, String name, String  phonenumber, String  college , String sex ){
         ResopnseResult resopnseResult=new ResopnseResult();
-        try{
+
             studentMapper.UpdateStuinfo(id,name,phonenumber,college,sex);
             resopnseResult.setCode(success_Stauts_Code);
             resopnseResult.setData("修改成功");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            throw new RuntimeException("修改错误");
 
-
-        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            throw new RuntimeException("修改错误");
+//        }
         return  resopnseResult;
     }
 }
