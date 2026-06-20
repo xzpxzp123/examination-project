@@ -10,7 +10,8 @@ import java.util.List;
 @Component
 public interface ScoreMapper {
     public List<exam_record> showAll(String course);
-    public List<exam_record> showOne(String course,String name);
+    public List<exam_record> showOne(@Param("course") String course, @Param("name") String name);
     public void InsertScore(@Param("course") String course, @Param("stu_name") String stu_name, @Param("point") String point, @Param("time") String time, @Param("retake_flag") String retake_flag);
     public String getMaxRetakeFlagById(@Param("course") String course, @Param("stu_name") String stu_name);
 }
+
