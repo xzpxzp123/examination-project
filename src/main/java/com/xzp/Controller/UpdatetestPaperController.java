@@ -1,5 +1,6 @@
 package com.xzp.Controller;
 
+import com.xzp.Aop.InvokeLog;
 import com.xzp.Mapper.testPaperMapper;
 import com.xzp.Pojo.ResopnseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +28,21 @@ public class UpdatetestPaperController {
     testPaperMapper testPaperMapper;
     private static int success_Stauts_Code=300;
     private static int error_Stauts_Code=400;
+    @InvokeLog
     @Transactional
     @RequestMapping("/Teacher/contro/updateTestPaper")
     public ResopnseResult<String> update(int id, String Question_type, String Question, List<String> Options, String answer, String point, String course){
         ResopnseResult resopnseResult=new ResopnseResult();
-        try{
+
             testPaperMapper.updateTestPaper(id,Question_type,Question,Options.get(0),Options.get(1),Options.get(2),Options.get(3),answer,point,course);
             resopnseResult.setCode(success_Stauts_Code);
             resopnseResult.setData("修改成功");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            throw new RuntimeException("修改错误");
-        }
+
+//        catch (Exception e){
+//            e.printStackTrace();
+//            throw new RuntimeException("修改错误");
+//        }
         return resopnseResult;
     }
 }
+
