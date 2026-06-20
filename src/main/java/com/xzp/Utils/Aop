@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class myAop {
-    @Pointcut("@annotation(com.xzp.Aop.InvokeLog)")
+    @Pointcut("@annotation(com.xzp.Utils.InvokeLog)")
     public void pt(){}
     @Around("pt()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
